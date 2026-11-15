@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+ * KINFORM design tokens
+ *
+ * Every color, font, radius, shadow and motion value used in the UI is
+ * defined here. Components reference tokens through Tailwind utilities
+ * (e.g. `bg-ink-900`, `text-bone`, `border-line`), never raw hex values.
+ * The brand is dark-first; there is intentionally no light theme yet.
+ * ------------------------------------------------------------------------- */
+
+@theme {
+  /* Surfaces: deep charcoal to near-black */
+  --color-ink-950: #0a0a0b;
+  --color-ink-900: #101012;
+  --color-ink-850: #141417;
+  --color-ink-800: #1a1a1e;
+  --color-ink-700: #232328;
+
+  /* Lines and dividers */
+  --color-line: #26262b;
+  --color-line-strong: #36363d;
+
+  /* Typography: warm white and muted grays */
+  --color-bone: #f3f0e9;
+  --color-mist: #a6a39c;
+  --color-dim: #75736d;
+
+  /* Restrained electric lime accent — use sparingly */
+  --color-lime: #c9f24d;
+  --color-lime-hover: #d6f772;
+  --color-lime-ink: #11140a;
+
+  /* Status */
+  --color-caution: #e8b04b;
+
+  /* Typography */
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --text-display: clamp(2.75rem, 1.6rem + 5vw, 5.75rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.035em;
+  --text-headline: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  --text-headline--line-height: 1.05;
+  --text-headline--letter-spacing: -0.028em;
+  --text-title: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.015em;
+
+  /* Radii */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  /* Shadows: soft and low-contrast on dark surfaces */
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.03) inset, 0 20px 40px -24px rgb(0 0 0 / 0.6);
+  --shadow-lift: 0 1px 0 0 rgb(255 255 255 / 0.05) inset, 0 30px 60px -30px rgb(0 0 0 / 0.8);
+  --shadow-glow: 0 0 0 1px rgb(201 242 77 / 0.35), 0 10px 40px -10px rgb(201 242 77 / 0.25);
+
+  /* Breakpoints (Tailwind defaults made explicit) */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-rise: rise 0.9s var(--ease-out-soft) both;
+  --animate-fade: fade 1.2s var(--ease-out-soft) both;
+  --animate-draw: draw 2.4s var(--ease-out-soft) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes draw {
+    from {
+      stroke-dashoffset: var(--dash, 600);
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background-color: var(--color-ink-950);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-lime);
+    color: var(--color-lime-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Layout container shared by every section */
+@utility container-page {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 80rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Small uppercase label used above headings and on data */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mist);
+}
+
+/* Fine grain overlay for photography placeholders */
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
