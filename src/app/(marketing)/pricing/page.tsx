@@ -67,6 +67,7 @@ export default function PricingPage() {
         body="See exactly what the assessment involves, what you’ll receive, and how your media is handled."
         primary={{ label: "Assessment details", href: "/assessment" }}
         secondary={{ label: "How it works", href: "/how-it-works" }}
+        photo="wideReach"
       />
     </>
   );

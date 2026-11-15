@@ -43,6 +43,10 @@ export const footerNav: { heading: string; items: NavItem[] }[] = [
   },
 ];
 
+/** Disclosure for site imagery (see src/content/media.ts). */
+export const imageryNote =
+  "Photography on this site is AI-generated and illustrative. It does not depict KINFORM customers or results.";
+
 /** Shared wellness disclaimer shown in the footer and on assessment pages. */
 export const wellnessDisclaimer =
   "KINFORM is a fitness and wellness service. It does not diagnose, treat or provide medical advice, and it is not a substitute for care from a qualified healthcare professional. If you have pain, a medical condition or concerning symptoms, consult a healthcare professional before starting any exercise program.";

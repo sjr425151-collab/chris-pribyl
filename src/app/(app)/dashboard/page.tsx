@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LineChart, Play } from "lucide-react";
+import { Photo } from "@/components/brand/photo";
 import { Panel, SampleTag } from "@/components/dashboard/panel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -40,6 +41,21 @@ export default function DashboardPage() {
                 <Play aria-hidden fill="currentColor" /> Start session
               </Button>
             </div>
+            <Photo
+              name="hipFlexor"
+              aspect="aspect-[21/9]"
+              shade
+              sizes="(min-width: 1280px) 50vw, 100vw"
+            >
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="inline-flex size-12 items-center justify-center rounded-full border border-white/20 bg-ink-950/50 text-bone backdrop-blur-md">
+                  <Play aria-hidden className="ml-0.5 size-4" fill="currentColor" />
+                </span>
+              </div>
+              <span className="absolute bottom-4 left-4 eyebrow text-bone/80">
+                Demo · Half-kneeling hip flexor rock
+              </span>
+            </Photo>
             <p id="session-note" className="sr-only">
               Sessions become available once accounts launch.
             </p>

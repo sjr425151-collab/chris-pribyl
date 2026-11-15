@@ -11,6 +11,7 @@ import {
   Stethoscope,
   Video,
 } from "lucide-react";
+import { Photo } from "@/components/brand/photo";
 import { AssessmentAreas } from "@/components/marketing/assessment-areas";
 import { FeatureCard } from "@/components/marketing/feature-card";
 import { PageHero } from "@/components/marketing/page-hero";
@@ -87,6 +88,7 @@ export default function AssessmentPage() {
   return (
     <>
       <PageHero
+        className="border-b-0 pb-0 md:pb-0"
         eyebrow="The assessment"
         title="Understand how you move, before you train."
         description="About 40 minutes at home with your phone. You’ll complete a questionnaire, a few photos, guided movement videos and simple tests — and receive clear priorities and a four-week plan."
@@ -102,6 +104,17 @@ export default function AssessmentPage() {
           </Button>
         </div>
       </PageHero>
+
+      {/* Visual band */}
+      <div className="container-page pt-12 md:pt-16">
+        <Photo
+          name="ankleTest"
+          aspect="aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]"
+          priority
+          caption="Knee-to-wall ankle test"
+          sizes="(min-width: 1280px) 1200px, 100vw"
+        />
+      </div>
 
       {/* What you'll complete */}
       <Section id="what-you-complete" className="scroll-mt-16">
@@ -150,10 +163,19 @@ export default function AssessmentPage() {
       {/* What is collected */}
       <Section className="border-t border-line">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
-          <SectionHeading
-            eyebrow="Information collected"
-            title="Only what’s needed to build your plan."
-          />
+          <div className="flex flex-col gap-10">
+            <SectionHeading
+              eyebrow="Information collected"
+              title="Only what’s needed to build your plan."
+            />
+            <Photo
+              name="balance"
+              aspect="aspect-[4/5]"
+              className="hidden lg:block"
+              caption="Single-leg balance test"
+              sizes="40vw"
+            />
+          </div>
           <dl className="flex flex-col">
             {collected.map(([term, desc]) => (
               <div key={term} className="grid gap-2 border-t border-line py-5 last:border-b sm:grid-cols-[12rem_1fr] sm:gap-8">

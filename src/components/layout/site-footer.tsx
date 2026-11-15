@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Wordmark } from "@/components/brand/wordmark";
-import { footerNav, site, wellnessDisclaimer } from "@/content/site";
+import { footerNav, imageryNote, site, wellnessDisclaimer } from "@/content/site";
 
 export function SiteFooter() {
   return (
@@ -34,7 +34,10 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-16 flex flex-col gap-6 border-t border-line pt-8 md:flex-row md:items-start md:justify-between">
-          <p className="max-w-3xl text-xs leading-relaxed text-dim">{wellnessDisclaimer}</p>
+          <div className="flex max-w-3xl flex-col gap-2 text-xs leading-relaxed text-dim">
+            <p>{wellnessDisclaimer}</p>
+            <p>{imageryNote}</p>
+          </div>
           <p className="shrink-0 font-mono text-xs text-dim">
             © {site.name} · Pre-launch preview
           </p>

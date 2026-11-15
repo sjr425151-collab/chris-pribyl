@@ -86,10 +86,17 @@ All tokens are defined in `src/app/globals.css` and used as Tailwind utilities:
 - **Radii, shadows** (`shadow-card`, `shadow-lift`, `shadow-glow`) and **motion** (`animate-rise`, `animate-fade`, `animate-draw`). Motion respects `prefers-reduced-motion`.
 - **Utilities:** `container-page`, `eyebrow`, `grain`.
 
+## Photography
+
+The site uses 8 editorial photos generated with Higgsfield (GPT Image 2.6). They share one art direction: real-looking adults aged 30 to 60+, low-key warm light on charcoal, and everyday clothes, so they sit naturally on the dark UI.
+
+- **Files:** `public/images/*.jpg`, optimized to 2000px, mozjpeg quality 80, 55–250 KB each. `next/image` serves responsive sizes with blur placeholders.
+- **Catalogue:** `src/content/media.ts` holds each image's alt text and focal point (`position`). Components refer to a photo by key (`<Photo name="heroSquat" />`), so a replacement image only needs the file swapped.
+- **Disclosure:** the footer says the photography is AI-generated and illustrative, and doesn't show customers or results. Keep that line until the images are replaced with commissioned photography.
+
 ## Placeholders to replace
 
 - **Wordmark:** `src/components/brand/wordmark.tsx` is a typographic placeholder until the approved logo exists.
-- **Photography:** `PhotoFrame` shows the art direction for each planned shot: real adults doing mobility, balance and strength work. Replace each one with `next/image` once licensed photography is available. No stock or AI-generated people are used.
 
 ## Environment variables
 

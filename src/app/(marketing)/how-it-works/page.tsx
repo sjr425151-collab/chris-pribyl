@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { PhotoFrame } from "@/components/brand/photo-frame";
+import { Photo } from "@/components/brand/photo";
 import { CtaSection } from "@/components/marketing/cta-section";
 import { PageHero } from "@/components/marketing/page-hero";
 import { JourneyTimeline } from "@/components/marketing/process-steps";
@@ -52,11 +52,15 @@ export default function HowItWorksPage() {
           <JourneyTimeline steps={assessmentJourney} />
           <div className="hidden lg:block">
             <div className="sticky top-28 flex flex-col gap-4">
-              <PhotoFrame
+              <Photo
+                name="stepDown"
                 aspect="aspect-[3/4]"
-                label="Guided movement video"
-                shot="Adult in their 50s filming a slow step-down from a low stair, phone propped at hip height. Over-the-shoulder angle showing the phone screen guide."
+                caption="Guided movement video"
+                sizes="320px"
               />
+              <p className="text-sm leading-relaxed text-dim">
+                Recording a step-down at home. On-screen guides show where to place your phone.
+              </p>
             </div>
           </div>
         </div>
@@ -85,6 +89,7 @@ export default function HowItWorksPage() {
         body="Review what the assessment includes, how your photos and videos are handled, and what you’ll receive."
         primary={{ label: "Assessment details", href: "/assessment" }}
         secondary={{ label: "See pricing", href: "/pricing" }}
+        photo="wideReach"
       />
     </>
   );

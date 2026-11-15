@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { PhotoFrame } from "@/components/brand/photo-frame";
+import { Photo } from "@/components/brand/photo";
 import { Wordmark } from "@/components/brand/wordmark";
 import { site } from "@/content/site";
 
@@ -19,12 +19,15 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         </main>
         <p className="text-xs text-dim">{site.tagline}</p>
       </div>
-      <div className="hidden p-3 lg:block">
-        <PhotoFrame
-          aspect="h-full"
-          label="Supported single-leg balance"
-          shot="Adult in their 60s balancing on one leg with fingertips on a kitchen counter, focused and relaxed. Warm morning light, shallow depth of field."
-        />
+      <div className="hidden p-3 lg:sticky lg:top-0 lg:block lg:h-dvh">
+        <Photo name="balance" className="h-full" shade sizes="50vw" priority>
+          <div className="absolute inset-x-0 bottom-0 flex flex-col gap-3 p-8 xl:p-12">
+            <p className="eyebrow text-lime">Balance · Movement control</p>
+            <p className="max-w-md text-balance text-title font-semibold text-bone">
+              Your body wasn’t meant to feel restricted.
+            </p>
+          </div>
+        </Photo>
       </div>
     </div>
   );
