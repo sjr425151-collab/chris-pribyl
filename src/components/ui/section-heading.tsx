@@ -1,61 +1,29 @@
-import * as React from "react";
 import { cn } from "@/lib/utils";
 
-interface SectionHeadingProps {
+interface Props {
   eyebrow?: string;
   title: React.ReactNode;
-  description?: React.ReactNode;
-  align?: "left" | "center";
-  as?: "h1" | "h2";
+  lede?: React.ReactNode;
   className?: string;
+  tone?: "dark" | "light";
+  as?: "h1" | "h2";
+  align?: "left" | "center";
 }
 
-export function SectionHeading({
-  eyebrow,
-  title,
-  description,
-  align = "left",
-  as: Heading = "h2",
-  className,
-}: SectionHeadingProps) {
+/** Index-numbered section heading with a hairline rule, in the spirit of a drawing title block. */
+export function SectionHeading({ eyebrow, title, lede, className, tone = "dark", as: As = "h2", align = "left" }: Props) {
   return (
-    <div
-      className={cn(
-        "flex max-w-2xl flex-col gap-5",
-        align === "center" && "mx-auto items-center text-center",
-        className,
-      )}
-    >
+    <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)} data-reveal>
       {eyebrow ? (
-        <p className="eyebrow flex items-center gap-2">
-          <span aria-hidden className="h-px w-6 bg-lime" />
+        <p className={cn("eyebrow mb-5 flex items-center gap-3", tone === "dark" ? "text-metal" : "text-bronze", align === "center" && "justify-center")}>
+          <span aria-hidden className={cn("h-px w-8", tone === "dark" ? "bg-metal/60" : "bg-bronze/60")} />
           {eyebrow}
         </p>
       ) : null}
-      <Heading
-        className={cn(
-          "text-balance font-semibold text-bone",
-          Heading === "h1" ? "text-display" : "text-headline",
-        )}
-      >
-        {title}
-      </Heading>
-      {description ? (
-        <p className="text-pretty text-lg leading-relaxed text-mist">{description}</p>
+      <As className="text-headline font-[680]">{title}</As>
+      {lede ? (
+        <p className={cn("mt-5 text-lede", tone === "dark" ? "text-steel" : "text-slate")}>{lede}</p>
       ) : null}
     </div>
-  );
-}
-
-/** Vertical rhythm wrapper for a full-width page section. */
-export function Section({
-  className,
-  children,
-  ...props
-}: React.HTMLAttributes<HTMLElement>) {
-  return (
-    <section className={cn("py-20 md:py-28 lg:py-32", className)} {...props}>
-      <div className="container-page">{children}</div>
-    </section>
   );
 }

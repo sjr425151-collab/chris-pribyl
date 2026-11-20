@@ -1,19 +1,32 @@
 import Link from "next/link";
-import { Wordmark } from "@/components/brand/wordmark";
-import { Button } from "@/components/ui/button";
+import { ArrowIcon, buttonVariants } from "@/components/ui/button";
+import { business } from "@/content/business";
 
 export default function NotFound() {
   return (
-    <main id="main" className="flex flex-1 flex-col items-center justify-center gap-8 px-5 py-24 text-center">
-      <Wordmark />
-      <div className="flex flex-col gap-3">
-        <p className="eyebrow">404</p>
-        <h1 className="text-headline font-semibold text-bone">This page doesn’t exist.</h1>
-        <p className="text-mist">It may have moved, or the link may be incorrect.</p>
+    <section className="blueprint flex min-h-[80svh] items-center bg-charcoal pt-32 pb-20">
+      <div className="container-x">
+        <p className="eyebrow text-metal">404 · Page not found</p>
+        <h1 className="mt-6 max-w-3xl text-display font-[740]" style={{ fontVariationSettings: '"wdth" 112' }}>
+          This page isn’t on the plans.
+        </h1>
+        <p className="mt-6 max-w-xl text-lede text-steel">It may have moved when we rebuilt the site. Try one of these, or call {business.phone.display}.</p>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Link href="/" className={buttonVariants({ variant: "light" })}>
+            Home
+            <ArrowIcon />
+          </Link>
+          <Link href="/services" className={buttonVariants({ variant: "outline" })}>
+            Services
+          </Link>
+          <Link href="/work" className={buttonVariants({ variant: "outline" })}>
+            Our work
+          </Link>
+          <Link href="/contact" className={buttonVariants({ variant: "outline" })}>
+            Request an estimate
+          </Link>
+        </div>
       </div>
-      <Button asChild>
-        <Link href="/">Back to home</Link>
-      </Button>
-    </main>
+    </section>
   );
 }

@@ -1,114 +1,40 @@
-# KINFORM
+# Dynamic Construction MI — website (preview)
 
-Personalized mobility, movement assessment and strength development.
+Cinematic, multi-page website for Dynamic Construction MI (Carleton, MI), built with
+Next.js 16 (App Router), TypeScript, Tailwind CSS v4 and GSAP ScrollTrigger.
 
-> **Your body wasn’t meant to feel restricted.**
-> Understand how you move and build a personalized approach to mobility, flexibility, and strength.
+**Live preview:** https://livefiberconnect.com/preview/dynamicconstruction/
+(static export, served by the Tucker app's isolated `/preview` route in
+`sjr425151-collab/fiber-appointment-engine` → `previews/dynamicconstruction`). Not indexed.
 
-This repository holds the KINFORM web platform. **Milestone 1** sets up the brand, the design system, the marketing website, the screens for auth and the dashboard, and an application structure ready for Supabase. It has **no** live authentication, payments, media uploads or AI assessment processing yet.
-
-## Stack
-
-- **Next.js 16** (App Router, Turbopack, Cache Components + Partial Prefetching enabled)
-- **TypeScript** (strict)
-- **Tailwind CSS v4**: design tokens live in `src/app/globals.css` (`@theme`)
-- **shadcn/ui conventions**: `components.json`, `cva` + `tailwind-merge` primitives in `src/components/ui`; `npx shadcn add <component>` works
-- **Supabase-ready**: `@supabase/ssr` clients in `src/lib/supabase` (inactive until env vars are set)
-- **Vercel-compatible**: zero-config deploy
-
-## Getting started
-
-Requires Node.js 20.9+ (developed on Node 22).
+## Develop / build
 
 ```bash
 npm install
-cp .env.example .env.local   # optional for milestone 1; fill in when Supabase is added
-npm run dev                  # http://localhost:3000
+npm run dev          # http://localhost:3000/preview/dynamicconstruction
+npm run build        # static export → out/
 ```
 
-| Script              | What it does                               |
-| ------------------- | ------------------------------------------ |
-| `npm run dev`       | Development server                         |
-| `npm run build`     | Production build (also type-checks)        |
-| `npm run start`     | Serve the production build                 |
-| `npm run lint`      | ESLint (Next.js core-web-vitals + TS)      |
-| `npm run typecheck` | Generate route types and run `tsc`         |
+`NEXT_PUBLIC_BASE_PATH` (default `/preview/dynamicconstruction`) sets the sub-path.
+To update the live preview: build, replace `previews/dynamicconstruction` in the
+fiber-appointment-engine repo with `out/`, run its `npm run check`, push.
 
-## Routes
+QA: serve the export, then `BASE_URL=… START_PATH=/preview/dynamicconstruction/ node scripts/qa.mjs --shots`
+(console errors, overflow, broken links, headings, axe WCAG 2.2 AA).
 
-| Route           | Purpose                                                                 |
-| --------------- | ----------------------------------------------------------------------- |
-| `/`             | Homepage: hero, audience, process, assessment areas, programming, Movement Moments, app preview, pricing preview, CTA |
-| `/how-it-works` | The seven-step journey and realistic expectations                       |
-| `/assessment`   | What’s completed, what’s collected, what you receive, limitations, safety referral, privacy, purchase (disabled) |
-| `/pricing`      | **Proposed** introductory pricing ($59 / $39 mo / $79 mo)               |
-| `/login`, `/signup` | Auth screens. The forms are visible but submission is disabled  |
-| `/dashboard`    | Protected-layout **design concept** with labelled sample content         |
+## Where things live
 
-## Project structure
+- `src/content/business.ts` — verified business facts + **claims registry** (each claim's source and status; `show: false` hides it everywhere)
+- `src/content/services.ts` — service pages (`enabled: false` keeps Barndominiums unpublished until confirmed)
+- `src/content/projects.ts` — portfolio (titles describe what's visible; locations/sizes left blank until confirmed)
+- `src/content/media.ts` + `src/assets/photos` — the company's own photos from dynamicroofingmi.com, resized, EXIF/GPS stripped
+- `src/content/testimonials.ts` — empty on purpose; add only verbatim, linkable reviews
+- `src/components/home/*`, `src/components/motion/*` — hero, scroll chapters, stacking project cards
+- `src/components/forms/estimate-form.tsx` — client validation; posts to `NEXT_PUBLIC_LEAD_ENDPOINT` if set, otherwise shows an honest "preview — nothing was sent" message
 
-```
-src/
-  app/
-    layout.tsx              Root layout: fonts, metadata, skip link
-    globals.css             Design tokens (@theme) and base styles
-    (marketing)/            Public site: header + footer layout
-    (auth)/                 Login / signup split-screen layout
-    (app)/                  Signed-in app shell (future auth guard)
-  components/
-    ui/                     Primitives: Button, Card, Badge, Input/Field, SectionHeading/Section
-    layout/                 SiteHeader (incl. mobile nav), SiteFooter
-    brand/                  Wordmark (placeholder), PhotoFrame, RangeArc
-    marketing/              ProcessSteps, FeatureCard, AssessmentAreas, PricingCard, CtaSection, PageHero, AppPreview
-    dashboard/              Panel, SampleTag
-    auth/                   AuthForm
-  content/                  All copy and data as typed modules (pricing, assessment areas, nav…)
-  lib/                      utils, env (public), env.server (secrets), supabase clients
-  types/domain.ts           Shared domain model for web + future mobile apps
-docs/ARCHITECTURE.md        Architecture decisions and the roadmap for future milestones
-```
+## Before production launch
 
-### Editing content
-
-- **Prices:** `src/content/pricing.ts`. Every pricing surface reads from this file.
-- **Assessment areas** (in priority order), the journey, limitations and referral signals: `src/content/assessment.ts`
-- **Brand copy, navigation and disclaimer:** `src/content/site.ts`
-- **Dashboard sample data:** `src/content/dashboard-sample.ts`. This is illustrative only.
-
-### Design system
-
-All tokens are defined in `src/app/globals.css` and used as Tailwind utilities:
-
-- **Surfaces:** `ink-950` … `ink-700`. **Lines:** `line`, `line-strong`.
-- **Text:** `bone` (warm white), `mist` (secondary), `dim` (tertiary).
-- **Accent:** `lime`, used sparingly for primary actions and highlights. **Status:** `caution`.
-- **Type scale:** `text-display`, `text-headline`, `text-title`. Fonts are Manrope (sans) and Geist Mono (labels and data).
-- **Radii, shadows** (`shadow-card`, `shadow-lift`, `shadow-glow`) and **motion** (`animate-rise`, `animate-fade`, `animate-draw`). Motion respects `prefers-reduced-motion`.
-- **Utilities:** `container-page`, `eyebrow`, `grain`.
-
-## Photography
-
-The site uses 8 editorial photos generated with Higgsfield (GPT Image 2.6). They share one art direction: real-looking adults aged 30 to 60+, low-key warm light on charcoal, and everyday clothes, so they sit naturally on the dark UI.
-
-- **Files:** `public/images/*.jpg`, optimized to 2000px, mozjpeg quality 80, 55–250 KB each. `next/image` serves responsive sizes with blur placeholders.
-- **Catalogue:** `src/content/media.ts` holds each image's alt text and focal point (`position`). Components refer to a photo by key (`<Photo name="heroSquat" />`), so a replacement image only needs the file swapped.
-- **Disclosure:** the footer says the photography is AI-generated and illustrative, and doesn't show customers or results. Keep that line until the images are replaced with commissioned photography.
-
-## Placeholders to replace
-
-- **Wordmark:** `src/components/brand/wordmark.tsx` is a typographic placeholder until the approved logo exists.
-
-## Environment variables
-
-See `.env.example`. Only `NEXT_PUBLIC_*` values reach the browser. `SUPABASE_SERVICE_ROLE_KEY` is read only through `src/lib/env.server.ts`, which imports `server-only`. `.env*` files are git-ignored except `.env.example`.
-
-## Deploying to Vercel
-
-Import the repository in Vercel. No configuration is needed. Add the environment variables from `.env.example` in the project settings when Supabase is connected.
-
-## Product and safety principles
-
-- KINFORM is a fitness and wellness service, **not** a medical diagnostic service. Copy uses phrases like *movement observations*, *training priorities* and *mobility goals*. It never says "diagnosis" or "correction".
-- What the user reports is always kept separate from what is observed (`Finding.source` in `src/types/domain.ts`).
-- Safety screening comes before programming. Red flags block automatic recommendations and lead to a referral to a professional.
-- There are no fake testimonials, ratings or statistics. Sample data is always labelled.
+- Owner confirms every claim in `business.ts` (certifications, 50-year warranty wording, one-day roofs, financing, emergency service) and the current Google rating/count
+- Add verified testimonials and the direct Google review link
+- Connect lead delivery (endpoint or server handler with email/CRM), analytics ID
+- Move off static export (or add an image CDN) for responsive image optimization; set canonical domain and `NEXT_PUBLIC_ALLOW_INDEXING=true`
