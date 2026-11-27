@@ -1,6 +1,6 @@
 # Handoff — 2026-11-27 — Phase 00 Foundation
 
-- **Authorization:** AUTH-001 &nbsp; **Phase:** 00 &nbsp; **Branch:** `claude/modest-mendel-9cb4m3` &nbsp; **Base:** `claude/kinform-website-foundation-nwlb0a` @ `9daaa79` &nbsp; **PR:** see §9
+- **Authorization:** AUTH-001 &nbsp; **Phase:** 00 &nbsp; **Branch:** `claude/modest-mendel-9cb4m3` &nbsp; **Base:** `claude/kinform-website-foundation-nwlb0a` @ `9daaa79` &nbsp; **PR:** [#1](https://github.com/sjr425151-collab/chris-pribyl/pull/1) (draft)
 
 ## 1. Repository baseline and environment findings
 
@@ -71,7 +71,9 @@ Listed in [open-items.md](../registers/open-items.md). The most urgent:
 
 ## 9. Branch, commit and PR
 
-The branch is `claude/modest-mendel-9cb4m3`. The commit SHA and PR number are given in the PR and the completion report. They cannot be self-referenced in the commit that contains them.
+- Branch: `claude/modest-mendel-9cb4m3`, based on `9daaa79`
+- Documentation commit: `ec77e33`. A follow-up commit records these identifiers.
+- Pull request: [#1](https://github.com/sjr425151-collab/chris-pribyl/pull/1), a **draft** against `claude/kinform-website-foundation-nwlb0a`, for review only. Not merged.
 
 ## 10. Recommended Phase 01 scope
 

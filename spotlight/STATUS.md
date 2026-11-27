@@ -10,7 +10,7 @@ The authoritative current state of the project. Update it at every handoff.
 | Next authorization (proposed) | AUTH-002: Phase 01 Strategic Discovery ([draft](registers/authorizations.md#auth-002-proposed)) |
 | Working location | `sjr425151-collab/chris-pribyl`, branch `claude/modest-mendel-9cb4m3`, directory `spotlight/` |
 | Base commit | `9daaa79` (KINFORM default branch head; unrelated project) |
-| Pull request | See the latest [handoff](handoffs/2026-11-27-phase-00-handoff.md) |
+| Pull request | [#1](https://github.com/sjr425151-collab/chris-pribyl/pull/1) (draft, review only; do not merge into the KINFORM base, see OPEN-002). Docs commit `ec77e33` |
 
 ## Completed
 
